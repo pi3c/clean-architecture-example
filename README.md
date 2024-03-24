@@ -40,8 +40,9 @@ bash scripts/start.sh
 
 ### posts
 - `GET /posts` - Get all posts
-- `GET /posts/{id}` - Get post by ID
 - `POST /posts` - Create a new post
+- `PATCH /posts` - Update a your own post
+- `GET /posts/{id}` - Get post by ID
 
 ### authentication
 - `POST /auth/register` - Register user
