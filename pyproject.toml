@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "clean_architecture_example" }
+
+[project]
+name = "clean-architecture-example"
+version = "0.0.1"
+authors = [
+    { name = "Alim Abrekov", email = "abrekovalim38702@gmail.com" },
+]
+description = "Blog RESTful API with clean architecture"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "python-jose",
+    "passlib",
+    "fastapi",
+    "psycopg[binary]",
+    "dishka",
+    "gunicorn",
+    "uvicorn",
+    "pydantic",
+]
+[project.optional-dependencies]
+test = [
+    "pytest"
+]
+lint = [
+    "black",
+    "isort",
+]
+
+
+[project.urls]
+"Homepage" = "https://github.com/Dark04072006/clean-architecture-example"
+"Bug Tracker" = "https://github.com/Dark04072006/clean-architecture-example/issues"
