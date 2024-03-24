@@ -1,10 +1,5 @@
 from typing import AsyncGenerator
 
-from dishka import Provider, Scope, from_context, provide
-from fastapi import Request
-from psycopg import AsyncConnection
-from psycopg.conninfo import conninfo_to_dict
-
 from core.application.common.date_time_provider import DateTimeProvider
 from core.application.common.jwt_processor import JwtTokenProcessor
 from core.application.common.password_hasher import PasswordHasher
@@ -18,9 +13,11 @@ from core.application.usecases.posts.get_posts import (
     GetPostList,
     GetPostListByOwnerId,
 )
+from core.application.usecases.posts.update_post import UpdatePost
 from core.application.usecases.users.get_current_user import GetCurrentUser
 from core.domain.posts.repository import PostRepository
 from core.domain.users.repository import UserRepository
+from dishka import Provider, Scope, from_context, provide
 from external.infrastructure.authentication.jwt_processor import JoseJwtTokenProcessor
 from external.infrastructure.authentication.jwt_settings import JwtSettings
 from external.infrastructure.authentication.user_context import FastAPIUserContext
@@ -39,6 +36,9 @@ from external.infrastructure.persistence.unit_of_work import PostgresqlUnitOfWor
 from external.infrastructure.security.password_hasher import Pbkdf2PasswordHasher
 from external.infrastructure.settings import MainSettings
 from external.infrastructure.utils.get_env_var import get_env_variable
+from fastapi import Request
+from psycopg import AsyncConnection
+from psycopg.conninfo import conninfo_to_dict
 
 
 class SettingsProvider(Provider):
@@ -124,6 +124,7 @@ class UseCasesProvider(Provider):
     get_post_by_id = provide(GetPostById)
     get_post_list = provide(GetPostList)
     get_post_list_by_owner_id = provide(GetPostListByOwnerId)
+    update_post = provide(UpdatePost)
 
 
 PROVIDERS: list[Provider] = [

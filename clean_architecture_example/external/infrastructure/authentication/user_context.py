@@ -1,7 +1,6 @@
-from fastapi import Request
-
 from core.application.common.user_context import UserContext
 from core.domain.users.user import User
+from fastapi import Request
 
 
 class FastAPIUserContext(UserContext):

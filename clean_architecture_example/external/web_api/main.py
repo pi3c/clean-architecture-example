@@ -1,10 +1,10 @@
 from dishka import make_async_container
 from dishka.integrations.fastapi import setup_dishka
-from fastapi import FastAPI
-
 from external.infrastructure.ioc import PROVIDERS
 from external.web_api.exc_handlers import HANDLERS
+from external.web_api.extensions.rate_limit import init_limiter
 from external.web_api.routers import auth_router, post_router, user_router
+from fastapi import FastAPI
 
 
 def init_di(app: FastAPI) -> None:
@@ -29,5 +29,6 @@ def app_factory() -> FastAPI:
     init_di(app)
     init_routers(app)
     init_exc_handlers(app)
+    init_limiter(app)
 
     return app

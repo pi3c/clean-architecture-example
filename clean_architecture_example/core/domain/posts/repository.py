@@ -1,6 +1,7 @@
+from datetime import datetime
 from typing import Protocol
 
-from core.domain.posts.post import Post, PostId
+from core.domain.posts.post import Post, PostContent, PostId, PostTitle
 from core.domain.users.user import UserId
 
 
@@ -17,4 +18,13 @@ class PostRepository(Protocol):
     async def find_by_owner_id(
         self, owner_id: UserId, limit: int = 20, offset: int = 0
     ) -> list[Post] | None:
+        raise NotImplementedError
+
+    async def edit(
+        self,
+        id: PostId,
+        title: PostTitle,
+        updated_at: datetime,
+        content: PostContent | None = None,
+    ) -> None:
         raise NotImplementedError

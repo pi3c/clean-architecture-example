@@ -27,6 +27,7 @@ dependencies = [
     "gunicorn",
     "uvicorn",
     "pydantic",
+    "slowapi",
 ]
 [project.optional-dependencies]
 test = [

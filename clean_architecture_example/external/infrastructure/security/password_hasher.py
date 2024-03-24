@@ -1,6 +1,5 @@
-from passlib.handlers.pbkdf2 import pbkdf2_sha256
-
 from core.application.common.password_hasher import PasswordHasher
+from passlib.handlers.pbkdf2 import pbkdf2_sha256
 
 
 class Pbkdf2PasswordHasher(PasswordHasher):
