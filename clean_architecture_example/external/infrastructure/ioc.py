@@ -22,7 +22,7 @@ from dishka import Provider, Scope, from_context, provide
 from external.infrastructure.authentication.jwt_processor import JoseJwtTokenProcessor
 from external.infrastructure.authentication.jwt_settings import JwtSettings
 from external.infrastructure.authentication.id_provider import JwtTokenIdProvider
-from external.infrastructure.patterns.date_time_provider import (
+from external.infrastructure.date_time_provider import (
     SystemDateTimeProvider,
     Timezone,
 )
