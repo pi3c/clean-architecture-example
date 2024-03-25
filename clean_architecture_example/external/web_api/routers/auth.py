@@ -3,7 +3,6 @@ from contracts.authentication.login_request import LoginRequest
 from contracts.authentication.register_request import RegisterRequest
 from core.application.usecases.authentication.login import Login
 from core.application.usecases.authentication.register import Register
-
 from dishka.integrations.fastapi import DishkaRoute, FromDishka
 from fastapi import APIRouter
 

@@ -8,12 +8,12 @@ from contracts.posts.post_list_response import PostListResponse
 from contracts.posts.update_post_request import UpdatePostRequest
 from core.application.usecases.posts.create_post import CreatePost
 from core.application.usecases.posts.delete_post import DeletePost
-from core.application.usecases.posts.get_posts import GetPostById, GetPostList
+from core.application.usecases.posts.get_post import GetPostById, GetPostList
 from core.application.usecases.posts.update_post import UpdatePost
-from external.web_api.dependencies.authentication import authentication_required
-
-from fastapi import APIRouter, Depends
 from dishka.integrations.fastapi import DishkaRoute, FromDishka
+from external.web_api.dependencies.authentication import authentication_required
+from external.web_api.schemas.post import UpdatePostSchema
+from fastapi import APIRouter, Depends
 
 post_router = APIRouter(
     prefix="/posts",
@@ -58,11 +58,16 @@ async def get_post_by_id(
 )
 async def update_post(
     post_id: UUID,
-    update_post_request: UpdatePostRequest,
+    update_post_schema: UpdatePostSchema,
     update_post_interactor: FromDishka[UpdatePost],
 ) -> PostDetailsResponse:
-    update_post_request.id = post_id
-    return await update_post_interactor(update_post_request)
+    return await update_post_interactor(
+        UpdatePostRequest(
+            id=post_id,
+            title=update_post_schema.title,
+            content=update_post_schema.content,
+        )
+    )
 
 
 @post_router.delete(

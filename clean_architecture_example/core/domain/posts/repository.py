@@ -20,7 +20,7 @@ class PostRepository(Protocol):
     ) -> list[Post] | None:
         raise NotImplementedError
 
-    async def edit(
+    async def update(
         self,
         id: PostId,
         title: PostTitle,

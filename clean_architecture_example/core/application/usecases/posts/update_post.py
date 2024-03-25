@@ -1,9 +1,9 @@
 from contracts.posts.post_details_response import PostDetailsResponse
 from contracts.posts.update_post_request import UpdatePostRequest
 from core.application.common.date_time_provider import DateTimeProvider
+from core.application.common.id_provider import IdProvider
 from core.application.common.interactor import Interactor
 from core.application.common.unit_of_work import UnitOfWork
-from core.application.common.id_provider import IdProvider
 from core.domain.posts.error import PostAccessDeniedError, PostNotFoundError
 from core.domain.posts.post import PostContent, PostId, PostTitle
 from core.domain.posts.repository import PostRepository
@@ -35,11 +35,16 @@ class UpdatePost(Interactor[UpdatePostRequest, PostDetailsResponse]):
 
         updated_at = self.date_time_provider.get_current_time()
 
-        await self.post_repository.edit(
+        if not request.content:
+            content = None
+        else:
+            content = PostContent(request.content)
+
+        await self.post_repository.update(
             post.id,
+            content=content,
             updated_at=updated_at,
             title=PostTitle(request.title),
-            content=PostContent(request.content) if post.content else None,
         )
 
         await self.uow.commit()

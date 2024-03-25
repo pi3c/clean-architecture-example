@@ -1,4 +1,5 @@
 from uuid import UUID
+
 from contracts.posts.get_posts_request import (
     GetPostListByOwnerIdRequest,
     GetPostListRequest,
@@ -39,7 +40,7 @@ class GetPostList(Interactor[GetPostListRequest, PostListResponse]):
         posts = await self.post_repository.find_all(request.limit, request.offset)
 
         if not posts:
-            return PostListResponse([])
+            return PostListResponse([], 0)
 
         data = [
             PostDetailsResponse(
@@ -66,7 +67,7 @@ class GetPostListByOwnerId(Interactor[GetPostListByOwnerIdRequest, PostListRespo
         )
 
         if not posts:
-            return PostListResponse([])
+            return PostListResponse([], 0)
 
         data = [
             PostDetailsResponse(

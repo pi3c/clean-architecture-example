@@ -2,7 +2,12 @@ from dishka import make_async_container
 from dishka.integrations.fastapi import setup_dishka
 from external.infrastructure.ioc import PROVIDERS
 from external.web_api.exc_handlers import HANDLERS
-from external.web_api.routers import auth_router, post_router, user_router
+from external.web_api.routers import (
+    auth_router,
+    comment_router,
+    post_router,
+    user_router,
+)
 from fastapi import FastAPI
 
 
@@ -15,6 +20,7 @@ def init_routers(app: FastAPI) -> None:
     app.include_router(user_router)
     app.include_router(auth_router)
     app.include_router(post_router)
+    app.include_router(comment_router)
 
 
 def init_exc_handlers(app: FastAPI) -> None:

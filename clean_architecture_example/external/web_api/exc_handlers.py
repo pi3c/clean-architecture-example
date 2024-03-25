@@ -1,5 +1,6 @@
 from typing import Awaitable, Callable, Type
 
+from core.domain.comments.error import CommentAccessDeniedError, CommentNotFoundError
 from core.domain.common.error import DomainError, DomainValidationError
 from core.domain.posts.error import PostAccessDeniedError, PostNotFoundError
 from core.domain.users.error import (
@@ -51,6 +52,18 @@ async def post_access_denied_exc_error_handler(
     return JSONResponse(status_code=403, content={"detail": exc.message})
 
 
+async def comment_not_found_error_exc_handler(
+    request: Request, exc: CommentNotFoundError
+) -> JSONResponse:
+    return JSONResponse(status_code=404, content={"detail": exc.message})
+
+
+async def comment_access_denied_error_exc_handler(
+    request: Request, exc: CommentAccessDeniedError
+) -> JSONResponse:
+    return JSONResponse(status_code=403, content={"detail": exc.message})
+
+
 ExceptionHandlerType = Callable[[Request, DomainError], Awaitable[JSONResponse]]
 
 HANDLERS: dict[Type[DomainError], ExceptionHandlerType] = {
@@ -60,4 +73,6 @@ HANDLERS: dict[Type[DomainError], ExceptionHandlerType] = {
     UserInvalidCredentialsError: user_invalid_credentials_error_exc_handler,
     PostNotFoundError: post_not_found_error_exc_handler,
     PostAccessDeniedError: post_access_denied_exc_error_handler,
+    CommentNotFoundError: comment_not_found_error_exc_handler,
+    CommentAccessDeniedError: comment_access_denied_error_exc_handler,
 }

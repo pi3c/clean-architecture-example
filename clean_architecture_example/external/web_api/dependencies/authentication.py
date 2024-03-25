@@ -1,9 +1,8 @@
 from typing import Annotated, cast
 
-from core.domain.users.repository import UserRepository
-from core.domain.users.error import UserIsNotAuthorizedError
 from core.application.common.jwt_processor import JwtTokenProcessor
-
+from core.domain.users.error import UserIsNotAuthorizedError
+from core.domain.users.repository import UserRepository
 from dishka import AsyncContainer
 from fastapi import Depends, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer

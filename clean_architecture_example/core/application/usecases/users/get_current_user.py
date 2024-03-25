@@ -1,6 +1,6 @@
 from contracts.users.current_user_response import CurrentUserResponse
-from core.application.common.interactor import Interactor
 from core.application.common.id_provider import IdProvider
+from core.application.common.interactor import Interactor
 from core.domain.users.error import UserIsNotAuthorizedError
 from core.domain.users.repository import UserRepository
 

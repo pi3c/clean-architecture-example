@@ -1,7 +1,7 @@
-from core.domain.users.user import UserId
 from core.application.common.id_provider import IdProvider
-from core.domain.users.error import UserIsNotAuthorizedError
 from core.application.common.jwt_processor import JwtTokenProcessor
+from core.domain.users.error import UserIsNotAuthorizedError
+from core.domain.users.user import UserId
 
 
 class JwtTokenIdProvider(IdProvider):

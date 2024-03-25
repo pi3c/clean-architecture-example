@@ -1,4 +1,5 @@
 from datetime import datetime
+
 from core.domain.posts.post import Post, PostContent, PostId, PostTitle
 from core.domain.posts.repository import PostRepository
 from core.domain.users.user import UserId
@@ -88,7 +89,7 @@ class PostgresqlPostRepository(PostRepository):
 
             return [post_from_dict_to_entity(row) for row in result]
 
-    async def edit(
+    async def update(
         self,
         id: PostId,
         title: PostTitle,

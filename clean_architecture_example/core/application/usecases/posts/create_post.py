@@ -1,9 +1,9 @@
 from contracts.posts.create_post_request import CreatePostRequest
 from contracts.posts.post_details_response import PostDetailsResponse
 from core.application.common.date_time_provider import DateTimeProvider
+from core.application.common.id_provider import IdProvider
 from core.application.common.interactor import Interactor
 from core.application.common.unit_of_work import UnitOfWork
-from core.application.common.id_provider import IdProvider
 from core.domain.posts.post import Post
 from core.domain.posts.repository import PostRepository
 
