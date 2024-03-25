@@ -15,11 +15,7 @@ from core.application.usecases.comments.get_comment import (
 )
 from core.application.usecases.posts.create_post import CreatePost
 from core.application.usecases.posts.delete_post import DeletePost
-from core.application.usecases.posts.get_post import (
-    GetPostById,
-    GetPostList,
-    GetPostListByOwnerId,
-)
+from core.application.usecases.posts.get_post import GetPostById, GetPostList
 from core.application.usecases.posts.update_post import UpdatePost
 from core.application.usecases.users.get_current_user import GetCurrentUser
 from core.domain.comments.repository import CommentRepository
@@ -137,7 +133,6 @@ class UseCasesProvider(Provider):
     create_post = provide(CreatePost)
     get_post_by_id = provide(GetPostById)
     get_post_list = provide(GetPostList)
-    get_post_list_by_owner_id = provide(GetPostListByOwnerId)
     update_post = provide(UpdatePost)
     delete_post = provide(DeletePost)
     create_comment = provide(CreateComment)
