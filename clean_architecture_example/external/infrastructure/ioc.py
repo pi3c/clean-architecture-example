@@ -8,6 +8,7 @@ from core.application.common.user_context import UserContext
 from core.application.usecases.authentication.login import Login
 from core.application.usecases.authentication.register import Register
 from core.application.usecases.posts.create_post import CreatePost
+from core.application.usecases.posts.delete_post import DeletePost
 from core.application.usecases.posts.get_posts import (
     GetPostById,
     GetPostList,
@@ -125,6 +126,7 @@ class UseCasesProvider(Provider):
     get_post_list = provide(GetPostList)
     get_post_list_by_owner_id = provide(GetPostListByOwnerId)
     update_post = provide(UpdatePost)
+    delete_post = provide(DeletePost)
 
 
 PROVIDERS: list[Provider] = [

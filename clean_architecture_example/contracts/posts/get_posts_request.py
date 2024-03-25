@@ -3,11 +3,6 @@ from uuid import UUID
 
 
 @dataclass(frozen=True)
-class GetPostByIdRequest:
-    id: UUID
-
-
-@dataclass(frozen=True)
 class GetPostListRequest:
     limit: int = field(default=20)
     offset: int = field(default=0)

@@ -28,3 +28,6 @@ class PostRepository(Protocol):
         content: PostContent | None = None,
     ) -> None:
         raise NotImplementedError
+
+    async def delete(self, id: PostId) -> None:
+        raise NotImplementedError

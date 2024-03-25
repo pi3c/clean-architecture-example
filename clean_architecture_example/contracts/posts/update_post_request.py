@@ -4,6 +4,13 @@ from uuid import UUID
 
 @dataclass(frozen=True)
 class UpdatePostRequest:
-    id: UUID
     title: str
     content: str | None = field(default=None)
+
+    @property
+    def id(self) -> UUID:
+        return getattr(self, "__id", None)
+
+    @id.setter
+    def id(self, value: UUID) -> None:
+        setattr(self, "__id", value)

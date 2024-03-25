@@ -107,3 +107,7 @@ class PostgresqlPostRepository(PostRepository):
                     """UPDATE posts SET title = %s, updated_at = %s WHERE id = %s;"""
                 )
                 await cursor.execute(query, (title.value, updated_at, id.value))
+
+    async def delete(self, id: PostId) -> None:
+        async with self.connection.cursor() as cursor:
+            await cursor.execute("DELETE FROM posts WHERE id = %s;", (id.value,))

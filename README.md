@@ -37,6 +37,7 @@ bash scripts/start.sh
 ```
 
 ## API Routes
+![screenshot](https://ibb.co/XWGCyyC)
 
 ### posts
 - `GET /posts` - Get all posts
