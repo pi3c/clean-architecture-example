@@ -37,13 +37,14 @@ bash scripts/start.sh
 ```
 
 ## API Routes
-![screenshot](https://ibb.co/XWGCyyC)
+![API Routes](static/api_routes.png)
 
 ### posts
 - `GET /posts` - Get all posts
 - `POST /posts` - Create a new post
-- `PATCH /posts` - Update a your own post
 - `GET /posts/{id}` - Get post by ID
+- `PATCH /posts{id}` - Update a post by post ID
+- `DELETE /posts/{id}` - Delete a post by post ID
 
 ### authentication
 - `POST /auth/register` - Register user
