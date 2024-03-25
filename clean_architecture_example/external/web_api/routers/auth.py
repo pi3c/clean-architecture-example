@@ -1,5 +1,3 @@
-from typing import Annotated
-
 from contracts.authentication.authentication_response import AuthenticationResponse
 from contracts.authentication.login_request import LoginRequest
 from contracts.authentication.register_request import RegisterRequest
@@ -19,7 +17,7 @@ auth_router = APIRouter(
 @auth_router.post("/register", response_model=AuthenticationResponse)
 async def register(
     register_request: RegisterRequest,
-    register_interactor: Annotated[Register, FromDishka()],
+    register_interactor: FromDishka[Register],
 ) -> AuthenticationResponse:
     return await register_interactor(register_request)
 
@@ -27,6 +25,6 @@ async def register(
 @auth_router.post("/login", response_model=AuthenticationResponse)
 async def login(
     login_request: LoginRequest,
-    login_interactor: Annotated[Login, FromDishka()],
+    login_interactor: FromDishka[Login],
 ) -> AuthenticationResponse:
     return await login_interactor(login_request)

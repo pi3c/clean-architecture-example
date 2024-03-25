@@ -25,7 +25,7 @@ post_router = APIRouter(
 @post_router.get("/", response_model=PostListResponse)
 async def get_post_list(
     get_post_list_request: Annotated[GetPostListRequest, Depends()],
-    get_post_list_interactor: Annotated[GetPostList, FromDishka()],
+    get_post_list_interactor: FromDishka[GetPostList],
 ) -> PostListResponse:
     return await get_post_list_interactor(get_post_list_request)
 
@@ -38,7 +38,7 @@ async def get_post_list(
 )
 async def create_post(
     create_post_request: CreatePostRequest,
-    create_post_interactor: Annotated[CreatePost, FromDishka()],
+    create_post_interactor: FromDishka[CreatePost],
 ) -> PostDetailsResponse:
     return await create_post_interactor(create_post_request)
 
@@ -46,7 +46,7 @@ async def create_post(
 @post_router.get("/{post_id}", response_model=PostDetailsResponse)
 async def get_post_by_id(
     post_id: UUID,
-    get_post_interactor: Annotated[GetPostById, FromDishka()],
+    get_post_interactor: FromDishka[GetPostById],
 ) -> PostDetailsResponse:
     return await get_post_interactor(post_id)
 
@@ -59,7 +59,7 @@ async def get_post_by_id(
 async def update_post(
     post_id: UUID,
     update_post_request: UpdatePostRequest,
-    update_post_interactor: Annotated[UpdatePost, FromDishka()],
+    update_post_interactor: FromDishka[UpdatePost],
 ) -> PostDetailsResponse:
     update_post_request.id = post_id
     return await update_post_interactor(update_post_request)
@@ -72,6 +72,6 @@ async def update_post(
 )
 async def delete_post(
     post_id: UUID,
-    delete_post_interactor: Annotated[DeletePost, FromDishka()],
+    delete_post_interactor: FromDishka[DeletePost],
 ) -> None:
     await delete_post_interactor(post_id)
