@@ -1,14 +1,24 @@
 from contracts.users.current_user_response import CurrentUserResponse
 from core.application.common.interactor import Interactor
-from core.application.common.user_context import UserContext
+from core.application.common.id_provider import IdProvider
+from core.domain.users.error import UserIsNotAuthorizedError
+from core.domain.users.repository import UserRepository
 
 
 class GetCurrentUser(Interactor[None, CurrentUserResponse]):
-    def __init__(self, user_context: UserContext) -> None:
-        self.user_context = user_context
+    def __init__(
+        self, id_provider: IdProvider, user_repository: UserRepository
+    ) -> None:
+        self.id_provider = id_provider
+        self.user_repository = user_repository
 
     async def __call__(self, request=None) -> CurrentUserResponse:
-        user = self.user_context.get_current_user()
+        user_id = self.id_provider.get_current_user_id()
+
+        user = await self.user_repository.find_by_id(user_id)
+
+        if not user:
+            raise UserIsNotAuthorizedError("Invalid authorization credentials provided")
 
         return CurrentUserResponse(
             id=user.id.value,

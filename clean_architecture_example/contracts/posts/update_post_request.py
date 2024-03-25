@@ -2,10 +2,11 @@ from dataclasses import dataclass, field
 from uuid import UUID
 
 
-@dataclass(frozen=True)
+@dataclass
 class UpdatePostRequest:
     title: str
     content: str | None = field(default=None)
+    __id: UUID | None = field(default=None, init=False)
 
     @property
     def id(self) -> UUID:

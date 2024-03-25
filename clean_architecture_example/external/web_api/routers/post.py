@@ -10,7 +10,7 @@ from core.application.usecases.posts.create_post import CreatePost
 from core.application.usecases.posts.delete_post import DeletePost
 from core.application.usecases.posts.get_posts import GetPostById, GetPostList
 from core.application.usecases.posts.update_post import UpdatePost
-from external.web_api.authentication.jwt_auth import authentication_required
+from external.web_api.dependencies.authentication import authentication_required
 
 from fastapi import APIRouter, Depends
 from dishka.integrations.fastapi import DishkaRoute, FromDishka

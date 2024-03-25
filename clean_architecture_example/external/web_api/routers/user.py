@@ -1,6 +1,6 @@
 from contracts.users.current_user_response import CurrentUserResponse
 from core.application.usecases.users.get_current_user import GetCurrentUser
-from external.web_api.authentication.jwt_auth import authentication_required
+from external.web_api.dependencies.authentication import authentication_required
 
 from fastapi import APIRouter, Depends
 from dishka.integrations.fastapi import DishkaRoute, FromDishka

@@ -4,7 +4,7 @@ from core.application.common.date_time_provider import DateTimeProvider
 from core.application.common.jwt_processor import JwtTokenProcessor
 from core.application.common.password_hasher import PasswordHasher
 from core.application.common.unit_of_work import UnitOfWork
-from core.application.common.user_context import UserContext
+from core.application.common.id_provider import IdProvider
 from core.application.usecases.authentication.login import Login
 from core.application.usecases.authentication.register import Register
 from core.application.usecases.posts.create_post import CreatePost
@@ -21,7 +21,7 @@ from core.domain.users.repository import UserRepository
 from dishka import Provider, Scope, from_context, provide
 from external.infrastructure.authentication.jwt_processor import JoseJwtTokenProcessor
 from external.infrastructure.authentication.jwt_settings import JwtSettings
-from external.infrastructure.authentication.user_context import FastAPIUserContext
+from external.infrastructure.authentication.id_provider import JwtTokenIdProvider
 from external.infrastructure.patterns.date_time_provider import (
     SystemDateTimeProvider,
     Timezone,
@@ -99,9 +99,12 @@ class AuthenticationAdaptersProvider(Provider):
         scope=Scope.REQUEST,
         provides=Request,
     )
-    user_context = provide(
-        FastAPIUserContext, scope=Scope.REQUEST, provides=UserContext
-    )
+
+    @provide(scope=Scope.REQUEST, provides=IdProvider)
+    def id_provider(
+        self, token_processor: JwtTokenProcessor, request: Request
+    ) -> IdProvider:
+        return JwtTokenIdProvider(token_processor=token_processor, token=request.auth)
 
 
 class SecurityProvider(Provider):

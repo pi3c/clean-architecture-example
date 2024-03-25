@@ -1,20 +1,19 @@
 from typing import Annotated, cast
 
-from core.application.common.jwt_processor import JwtTokenProcessor
-from core.domain.users.error import UserIsNotAuthorizedError
 from core.domain.users.repository import UserRepository
+from core.domain.users.error import UserIsNotAuthorizedError
+from core.application.common.jwt_processor import JwtTokenProcessor
+
 from dishka import AsyncContainer
 from fastapi import Depends, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-
-auth_scheme = HTTPBearer()
 
 
 async def authentication_required(
     request: Request,
     credentials_provider: Annotated[
         HTTPAuthorizationCredentials,
-        Depends(auth_scheme),
+        Depends(HTTPBearer()),
     ],
 ) -> None:
     error = UserIsNotAuthorizedError("Invalid authentication credentials provided")
@@ -40,5 +39,4 @@ async def authentication_required(
 
 def _get_container(request: Request) -> AsyncContainer:
     container_attr = getattr(request.state, "dishka_container")
-
     return cast(AsyncContainer, container_attr)
