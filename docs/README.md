@@ -37,7 +37,7 @@ bash scripts/start.sh
 ```
 
 ## API Routes
-![API Routes](static/api_routes.png)
+![API Routes](docs/api_routes.png)
 
 ### posts
 - `GET /posts` - Get all posts
@@ -45,6 +45,13 @@ bash scripts/start.sh
 - `GET /posts/{id}` - Get post by ID
 - `PATCH /posts{id}` - Update a post by post ID
 - `DELETE /posts/{id}` - Delete a post by post ID
+
+### comments
+- `POST /comments` - Create comment
+- `GET /comments/{id}` - Get comment by ID
+- `PATCH /comments/{id}` - Update comment by ID
+- `DELETE /comments/{id}` - Delete comment by ID
+- `GET /comments?post_id=` - Get comments by post ID
 
 ### authentication
 - `POST /auth/register` - Register user

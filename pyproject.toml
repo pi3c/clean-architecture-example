@@ -27,6 +27,7 @@ dependencies = [
     "gunicorn",
     "uvicorn",
     "pydantic",
+    "yoyo-migrations",
 ]
 [project.optional-dependencies]
 test = [

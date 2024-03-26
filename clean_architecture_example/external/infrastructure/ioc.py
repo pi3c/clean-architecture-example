@@ -57,11 +57,11 @@ class SettingsProvider(Provider):
     @provide(scope=Scope.APP)
     def db_settings(self) -> DatabaseSettings:
         return DatabaseSettings(
-            host=get_env_variable("DB_HOST"),
-            port=int(get_env_variable("DB_PORT")),
-            user=get_env_variable("DB_USER"),
-            password=get_env_variable("DB_PASSWORD"),
-            database=get_env_variable("DB_NAME"),
+            host=get_env_variable("POSTGRES_HOST"),
+            port=int(get_env_variable("POSTGRES_PORT")),
+            user=get_env_variable("POSTGRES_USER"),
+            password=get_env_variable("POSTGRES_PASSWORD"),
+            database=get_env_variable("POSTGRES_DB"),
         )
 
     @provide(scope=Scope.APP)

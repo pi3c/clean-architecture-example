@@ -1,6 +1,6 @@
 #! /bin/bash
 
-source scripts/env.sh
+source env/.env
 
 cd clean_architecture_example/ || exit 1
 
