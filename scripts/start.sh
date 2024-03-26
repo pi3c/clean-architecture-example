@@ -1,6 +1,8 @@
 #! /bin/bash
 
-source env/.env
+source env/env.sh
+
+yoyo-migrate apply --batch
 
 cd clean_architecture_example/ || exit 1
 

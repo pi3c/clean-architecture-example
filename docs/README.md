@@ -12,24 +12,26 @@ pip install -e .
 
 ## Setting Environment Variables
 
-Before running the project, make sure you have an `.env` file in the `env/` directory, containing the following variables:
+Before running the project, make sure you have an `env.sh` file in the `env/` directory, containing the following variables:
 
-```.env
+```bash
+#! /bin/bash
+
 # JWT settings
-JWT_SECRET_KEY=
-JWT_ALGORITHM=HS256
-JWT_EXPIRES_IN=2
+export JWT_SECRET_KEY=
+export JWT_ALGORITHM=HS256
+export JWT_EXPIRES_IN=2
 
 # PostgreSQL settings
-POSTGRES_USER=
-POSTGRES_PASSWORD=
-POSTGRES_DB=
-POSTGRES_HOST=
-POSTGRES_PORT=5432
+export POSTGRES_USER=
+export POSTGRES_PASSWORD=
+export POSTGRES_DB=
+export POSTGRES_HOST=
+export POSTGRES_PORT=5432
 
 # Server settings
-SERVER_HOST=0.0.0.0
-SERVER_PORT=8000
+export SERVER_HOST=0.0.0.0
+export SERVER_PORT=8000
 ```
 
 ## Running
@@ -55,7 +57,7 @@ bash scripts/start.sh
 - `GET /comments/{id}` - Get comment by ID
 - `PATCH /comments/{id}` - Update comment by ID
 - `DELETE /comments/{id}` - Delete comment by ID
-- `GET /comments?post_id=` - Get comments by post ID
+- `GET /comments/?post_id=` - Get comments by post ID
 
 ### authentication
 - `POST /auth/register` - Register user
