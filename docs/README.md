@@ -37,7 +37,7 @@ bash scripts/start.sh
 ```
 
 ## API Routes
-![API Routes](docs/api_routes.png)
+![API Routes](api_routes.png)
 
 ### posts
 - `GET /posts` - Get all posts
