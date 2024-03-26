@@ -12,20 +12,24 @@ pip install -e .
 
 ## Setting Environment Variables
 
-Before running the project, make sure you have an `env.sh` file in the `scripts` directory, containing the following variables:
+Before running the project, make sure you have an `.env` file in the `env/` directory, containing the following variables:
 
-```bash
-#! /bin/bash
+```.env
+# JWT settings
+JWT_SECRET_KEY=
+JWT_ALGORITHM=HS256
+JWT_EXPIRES_IN=2
 
-export JWT_SECRET_KEY=<your_secret_key>
-export JWT_ALGORITHM=<encryption_algorithm>
-export JWT_EXPIRES_IN=<token_expiry_time>
-export DB_HOST=<database_host>
-export DB_PORT=<database_port>
-export DB_USER=<database_user>
-export DB_PASSWORD=<database_password>
-export DB_NAME=<database_name>
-export SERVER_BIND=<server_address_and_port>
+# PostgreSQL settings
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_DB=
+POSTGRES_HOST=
+POSTGRES_PORT=5432
+
+# Server settings
+SERVER_HOST=0.0.0.0
+SERVER_PORT=8000
 ```
 
 ## Running
