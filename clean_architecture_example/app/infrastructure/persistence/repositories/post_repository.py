@@ -1,14 +1,13 @@
 from datetime import datetime
 
-from psycopg import AsyncConnection
-from psycopg.rows import dict_row
-
 from app.domain.posts.post import Post, PostContent, PostId, PostTitle
 from app.domain.posts.repository import PostRepository
 from app.domain.users.user import UserId
 from app.infrastructure.persistence.repositories.mappers.post_mapper import (
     post_from_dict_to_entity,
 )
+from psycopg import AsyncConnection
+from psycopg.rows import dict_row
 
 
 class PostgresqlPostRepository(PostRepository):

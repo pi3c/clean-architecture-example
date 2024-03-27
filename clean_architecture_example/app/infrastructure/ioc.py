@@ -1,10 +1,5 @@
 from typing import AsyncGenerator
 
-from dishka import Provider, Scope, from_context, provide
-from fastapi import Request
-from psycopg import AsyncConnection
-from psycopg.conninfo import conninfo_to_dict
-
 from app.application.common.date_time_provider import DateTimeProvider
 from app.application.common.id_provider import IdProvider
 from app.application.common.jwt_processor import JwtTokenProcessor
@@ -44,6 +39,10 @@ from app.infrastructure.persistence.unit_of_work import PostgresqlUnitOfWork
 from app.infrastructure.security.password_hasher import Pbkdf2PasswordHasher
 from app.infrastructure.settings import MainSettings
 from app.infrastructure.utils.get_env_var import get_env_variable
+from dishka import Provider, Scope, from_context, provide
+from fastapi import Request
+from psycopg import AsyncConnection
+from psycopg.conninfo import conninfo_to_dict
 
 
 class SettingsProvider(Provider):

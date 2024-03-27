@@ -1,9 +1,6 @@
 from typing import Annotated
-from app.application.common.jwt_processor import JwtTokenProcessor
-from app.domain.users.user import UserId
-from dishka.integrations.fastapi import DishkaRoute, FromDishka
-from fastapi import APIRouter, Depends, Response
 
+from app.application.common.jwt_processor import JwtTokenProcessor
 from app.application.contracts.authentication.authentication_response import (
     AuthenticationResponse,
 )
@@ -11,6 +8,9 @@ from app.application.contracts.authentication.login_request import LoginRequest
 from app.application.contracts.authentication.register_request import RegisterRequest
 from app.application.usecases.authentication.login import Login
 from app.application.usecases.authentication.register import Register
+from app.domain.users.user import UserId
+from dishka.integrations.fastapi import DishkaRoute, FromDishka
+from fastapi import APIRouter, Depends, Response
 from fastapi.security import OAuth2PasswordRequestForm
 
 auth_router = APIRouter(

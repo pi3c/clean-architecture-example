@@ -1,14 +1,13 @@
 from datetime import datetime
 
-from psycopg import AsyncConnection
-from psycopg.rows import dict_row
-
 from app.domain.comments.comment import Comment, CommentContent, CommentId
 from app.domain.comments.repository import CommentRepository
 from app.domain.posts.post import PostId
 from app.infrastructure.persistence.repositories.mappers.comment_mapper import (
     comment_from_dict_to_entity,
 )
+from psycopg import AsyncConnection
+from psycopg.rows import dict_row
 
 
 class PostgresqlCommentRepository(CommentRepository):

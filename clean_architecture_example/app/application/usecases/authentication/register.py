@@ -1,10 +1,10 @@
+from app.application.common.interactor import Interactor
+from app.application.common.password_hasher import PasswordHasher
+from app.application.common.unit_of_work import UnitOfWork
 from app.application.contracts.authentication.authentication_response import (
     AuthenticationResponse,
 )
 from app.application.contracts.authentication.register_request import RegisterRequest
-from app.application.common.interactor import Interactor
-from app.application.common.password_hasher import PasswordHasher
-from app.application.common.unit_of_work import UnitOfWork
 from app.domain.users.error import UserAlreadyExistsError
 from app.domain.users.repository import UserRepository
 from app.domain.users.user import User, UserEmail

@@ -1,13 +1,12 @@
 from datetime import timedelta
 from uuid import UUID
 
-from jose import JWTError
-from jose.jwt import decode, encode
-
 from app.application.common.date_time_provider import DateTimeProvider
 from app.application.common.jwt_processor import JwtTokenProcessor
 from app.domain.users.user import UserId
 from app.infrastructure.authentication.jwt_settings import JwtSettings
+from jose import JWTError
+from jose.jwt import decode, encode
 
 
 class JoseJwtTokenProcessor(JwtTokenProcessor):

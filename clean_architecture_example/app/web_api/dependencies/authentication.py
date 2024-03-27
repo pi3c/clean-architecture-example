@@ -1,12 +1,10 @@
+from typing import Annotated, Dict, Optional
+
 from app.domain.users.error import UserIsNotAuthorizedError
-from fastapi.security import OAuth2
+from fastapi import Depends, HTTPException, Request, status
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
-from fastapi import Depends, Request
+from fastapi.security import OAuth2
 from fastapi.security.utils import get_authorization_scheme_param
-from fastapi import HTTPException
-from fastapi import status
-from typing import Annotated, Optional
-from typing import Dict
 
 
 class OAuth2PasswordBearerWithCookie(OAuth2):

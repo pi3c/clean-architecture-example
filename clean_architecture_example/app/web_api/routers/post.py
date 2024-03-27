@@ -1,9 +1,6 @@
 from typing import Annotated
 from uuid import UUID
 
-from dishka.integrations.fastapi import DishkaRoute, FromDishka
-from fastapi import APIRouter, Depends
-
 from app.application.contracts.posts.create_post_request import CreatePostRequest
 from app.application.contracts.posts.get_posts_request import GetPostListRequest
 from app.application.contracts.posts.post_details_response import PostDetailsResponse
@@ -15,6 +12,8 @@ from app.application.usecases.posts.get_post import GetPostById, GetPostList
 from app.application.usecases.posts.update_post import UpdatePost
 from app.web_api.dependencies.authentication import auth_required
 from app.web_api.schemas.post import UpdatePostSchema
+from dishka.integrations.fastapi import DishkaRoute, FromDishka
+from fastapi import APIRouter, Depends
 
 post_router = APIRouter(
     prefix="/posts",

@@ -1,9 +1,6 @@
 from typing import Annotated
 from uuid import UUID
 
-from dishka.integrations.fastapi import DishkaRoute, FromDishka
-from fastapi import APIRouter, Depends
-
 from app.application.contracts.comments.comment_details_response import (
     CommentDetailsResponse,
 )
@@ -24,6 +21,8 @@ from app.application.usecases.comments.get_comment import (
 from app.application.usecases.comments.update_comment import UpdateComment
 from app.web_api.dependencies.authentication import auth_required
 from app.web_api.schemas.comment import UpdateCommentSchema
+from dishka.integrations.fastapi import DishkaRoute, FromDishka
+from fastapi import APIRouter, Depends
 
 comment_router = APIRouter(
     prefix="/comments",

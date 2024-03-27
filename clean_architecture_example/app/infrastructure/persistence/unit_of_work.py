@@ -1,6 +1,5 @@
-from psycopg import AsyncConnection
-
 from app.application.common.unit_of_work import UnitOfWork
+from psycopg import AsyncConnection
 
 
 class PostgresqlUnitOfWork(UnitOfWork):

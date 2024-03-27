@@ -1,8 +1,5 @@
 from typing import Awaitable, Callable, Type
 
-from fastapi import Request
-from fastapi.responses import JSONResponse
-
 from app.domain.comments.error import CommentAccessDeniedError, CommentNotFoundError
 from app.domain.common.error import DomainError, DomainValidationError
 from app.domain.posts.error import PostAccessDeniedError, PostNotFoundError
@@ -11,6 +8,8 @@ from app.domain.users.error import (
     UserInvalidCredentialsError,
     UserIsNotAuthorizedError,
 )
+from fastapi import Request
+from fastapi.responses import JSONResponse
 
 
 async def validation_error_exc_handler(
