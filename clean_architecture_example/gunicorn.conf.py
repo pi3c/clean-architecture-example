@@ -1,7 +1,7 @@
 import os
 
 # WSGI application
-wsgi_app = "external.web_api.main:app_factory()"
+wsgi_app = "app.web_api.main:app_factory()"
 
 # Worker class
 worker_class = "uvicorn.workers.UvicornWorker"
