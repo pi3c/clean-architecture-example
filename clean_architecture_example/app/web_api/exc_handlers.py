@@ -1,14 +1,12 @@
-from typing import Awaitable, Callable, Type
-
 from app.domain.comments.error import CommentAccessDeniedError, CommentNotFoundError
-from app.domain.common.error import DomainError, DomainValidationError
+from app.domain.common.error import DomainValidationError
 from app.domain.posts.error import PostAccessDeniedError, PostNotFoundError
 from app.domain.users.error import (
     UserAlreadyExistsError,
     UserInvalidCredentialsError,
     UserIsNotAuthorizedError,
 )
-from fastapi import Request
+from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
 
@@ -64,15 +62,22 @@ async def comment_access_denied_error_exc_handler(
     return JSONResponse(status_code=403, content={"detail": exc.message})
 
 
-ExceptionHandlerType = Callable[[Request, DomainError], Awaitable[JSONResponse]]
-
-HANDLERS: dict[Type[DomainError], ExceptionHandlerType] = {
-    DomainValidationError: validation_error_exc_handler,
-    UserIsNotAuthorizedError: user_authentication_error_exc_handler,
-    UserAlreadyExistsError: user_already_exist_error_exc_handler,
-    UserInvalidCredentialsError: user_invalid_credentials_error_exc_handler,
-    PostNotFoundError: post_not_found_error_exc_handler,
-    PostAccessDeniedError: post_access_denied_exc_error_handler,
-    CommentNotFoundError: comment_not_found_error_exc_handler,
-    CommentAccessDeniedError: comment_access_denied_error_exc_handler,
-}
+def init_exc_handlers(app: FastAPI) -> None:
+    app.add_exception_handler(DomainValidationError, validation_error_exc_handler)
+    app.add_exception_handler(
+        UserIsNotAuthorizedError, user_authentication_error_exc_handler
+    )
+    app.add_exception_handler(
+        UserAlreadyExistsError, user_already_exist_error_exc_handler
+    )
+    app.add_exception_handler(
+        UserInvalidCredentialsError, user_invalid_credentials_error_exc_handler
+    )
+    app.add_exception_handler(PostNotFoundError, post_not_found_error_exc_handler)
+    app.add_exception_handler(
+        PostAccessDeniedError, post_access_denied_exc_error_handler
+    )
+    app.add_exception_handler(CommentNotFoundError, comment_not_found_error_exc_handler)
+    app.add_exception_handler(
+        CommentAccessDeniedError, comment_access_denied_error_exc_handler
+    )

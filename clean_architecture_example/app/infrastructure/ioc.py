@@ -39,7 +39,14 @@ from app.infrastructure.persistence.unit_of_work import PostgresqlUnitOfWork
 from app.infrastructure.security.password_hasher import Pbkdf2PasswordHasher
 from app.infrastructure.settings import MainSettings
 from app.infrastructure.utils.get_env_var import get_env_variable
-from dishka import Provider, Scope, from_context, provide
+from dishka import (
+    AsyncContainer,
+    Provider,
+    Scope,
+    from_context,
+    make_async_container,
+    provide,
+)
 from fastapi import Request
 from psycopg import AsyncConnection
 from psycopg.conninfo import conninfo_to_dict
@@ -141,12 +148,13 @@ class UseCasesProvider(Provider):
     delete_comment = provide(DeleteComment)
 
 
-PROVIDERS: list[Provider] = [
-    SettingsProvider(),
-    DatabaseConfigurationProvider(),
-    DatabaseAdaptersProvider(),
-    AuthenticationAdaptersProvider(),
-    SecurityProvider(),
-    UseCasesProvider(),
-    DateTimeProvider(),
-]
+def create_container() -> AsyncContainer:
+    return make_async_container(
+        SettingsProvider(),
+        DatabaseConfigurationProvider(),
+        DatabaseAdaptersProvider(),
+        AuthenticationAdaptersProvider(),
+        SecurityProvider(),
+        UseCasesProvider(),
+        DateTimeProvider(),
+    )
