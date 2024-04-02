@@ -22,9 +22,7 @@ class PostTitle(ValueObject):
             raise DomainValidationError("Post title is required.")
 
         if len(self.value) > 100:
-            raise DomainValidationError(
-                "Invalid post title. Post title must be less than 100 characters."
-            )
+            raise DomainValidationError("Invalid post title. Post title must be less than 100 characters.")
 
 
 @dataclass(frozen=True)
@@ -36,9 +34,7 @@ class PostContent(ValueObject):
             raise DomainValidationError("Post content is required.")
 
         if len(self.value) > 1000:
-            raise DomainValidationError(
-                "Invalid post content. Post content must be less than 1000 characters."
-            )
+            raise DomainValidationError("Invalid post content. Post content must be less than 1000 characters.")
 
 
 @dataclass

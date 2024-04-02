@@ -28,9 +28,7 @@ class Login(Interactor[LoginRequest, AuthenticationResponse]):
         if user is None:
             raise error
 
-        if not self.password_hasher.verify_password(
-            request.password, user.hashed_password
-        ):
+        if not self.password_hasher.verify_password(request.password, user.hashed_password):
             raise error
 
         return AuthenticationResponse(

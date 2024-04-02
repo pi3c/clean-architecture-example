@@ -10,9 +10,7 @@ from jose.jwt import decode, encode
 
 
 class JoseJwtTokenProcessor(JwtTokenProcessor):
-    def __init__(
-        self, jwt_options: JwtSettings, date_time_provider: DateTimeProvider
-    ) -> None:
+    def __init__(self, jwt_options: JwtSettings, date_time_provider: DateTimeProvider) -> None:
         self.jwt_options = jwt_options
         self.date_time_provider = date_time_provider
 
@@ -30,9 +28,7 @@ class JoseJwtTokenProcessor(JwtTokenProcessor):
 
     def validate_token(self, token: str) -> UserId | None:
         try:
-            payload = decode(
-                token, self.jwt_options.secret, [self.jwt_options.algorithm]
-            )
+            payload = decode(token, self.jwt_options.secret, [self.jwt_options.algorithm])
 
             return UserId(UUID(payload["sub"]))
 

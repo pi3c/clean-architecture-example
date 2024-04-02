@@ -1,9 +1,8 @@
 from app.infrastructure.ioc import create_container
 from app.web_api.exc_handlers import init_exc_handlers
 from app.web_api.routers import auth_router, comment_router, post_router, user_router
-
-from fastapi import FastAPI
 from dishka.integrations.fastapi import setup_dishka
+from fastapi import FastAPI
 
 
 def init_di(app: FastAPI) -> None:

@@ -37,9 +37,7 @@ class UpdateComment(Interactor[UpdateCommentRequest, CommentDetailsResponse]):
 
         updated_at = self.date_time_provider.get_current_time()
 
-        await self.comment_repository.update(
-            comment.id, updated_at=updated_at, content=CommentContent(request.content)
-        )
+        await self.comment_repository.update(comment.id, updated_at=updated_at, content=CommentContent(request.content))
 
         await self.uow.commit()
 

@@ -34,15 +34,11 @@ class GetCommentById(Interactor[UUID, CommentDetailsResponse]):
         )
 
 
-class GetCommentListByPostId(
-    Interactor[GetCommentsByPostIdRequest, CommentListResponse]
-):
+class GetCommentListByPostId(Interactor[GetCommentsByPostIdRequest, CommentListResponse]):
     def __init__(self, comment_repository: CommentRepository) -> None:
         self.comment_repository = comment_repository
 
-    async def __call__(
-        self, request: GetCommentsByPostIdRequest
-    ) -> CommentListResponse:
+    async def __call__(self, request: GetCommentsByPostIdRequest) -> CommentListResponse:
         comments = await self.comment_repository.find_by_post_id(
             PostId(request.post_id),
             request.limit,

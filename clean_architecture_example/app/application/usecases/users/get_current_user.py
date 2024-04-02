@@ -6,9 +6,7 @@ from app.domain.users.repository import UserRepository
 
 
 class GetCurrentUser(Interactor[None, CurrentUserResponse]):
-    def __init__(
-        self, id_provider: IdProvider, user_repository: UserRepository
-    ) -> None:
+    def __init__(self, id_provider: IdProvider, user_repository: UserRepository) -> None:
         self.id_provider = id_provider
         self.user_repository = user_repository
 

@@ -62,9 +62,7 @@ class PostgresqlCommentRepository(CommentRepository):
 
             return comment_from_dict_to_entity(result)
 
-    async def find_by_post_id(
-        self, post_id: PostId, limit: int = 20, offset: int = 0
-    ) -> list[Comment] | None:
+    async def find_by_post_id(self, post_id: PostId, limit: int = 20, offset: int = 0) -> list[Comment] | None:
         async with self.connection.cursor(row_factory=dict_row) as cursor:
             await cursor.execute(
                 """
