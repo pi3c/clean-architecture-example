@@ -1,4 +1,4 @@
-from typing import Annotated, Dict, Optional
+from typing import Annotated
 
 from app.domain.users.error import UserIsNotAuthorizedError
 from fastapi import Depends, HTTPException, Request, status
@@ -11,8 +11,8 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
     def __init__(
         self,
         tokenUrl: str,
-        scheme_name: Optional[str] = None,
-        scopes: Optional[Dict[str, str]] = None,
+        scheme_name: str | None = None,
+        scopes: dict[str, str] | None = None,
         auto_error: bool = True,
     ):
         if not scopes:
@@ -20,11 +20,11 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
         flows = OAuthFlowsModel(password={"tokenUrl": tokenUrl, "scopes": scopes})
         super().__init__(flows=flows, scheme_name=scheme_name, auto_error=auto_error)
 
-    async def __call__(self, request: Request) -> Optional[str]:
-        authorization: str = request.cookies.get("access_token")
+    async def __call__(self, request: Request) -> str | None:
+        authorization: str | None = request.cookies.get("access_token")
 
         scheme, param = get_authorization_scheme_param(authorization)
-        if not authorization or scheme.lower() != "bearer":
+        if authorization is not None or scheme.lower() != "bearer":
             if self.auto_error:
                 raise HTTPException(
                     status_code=status.HTTP_401_UNAUTHORIZED,

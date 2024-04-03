@@ -15,9 +15,7 @@ class PostRepository(Protocol):
     async def find_by_id(self, id: PostId) -> Post | None:
         raise NotImplementedError
 
-    async def find_by_owner_id(
-        self, owner_id: UserId, limit: int = 20, offset: int = 0
-    ) -> list[Post] | None:
+    async def find_by_owner_id(self, owner_id: UserId, limit: int = 20, offset: int = 0) -> list[Post] | None:
         raise NotImplementedError
 
     async def update(

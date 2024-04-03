@@ -14,7 +14,7 @@ class GetPostById(Interactor[UUID, PostDetailsResponse]):
         self.post_repository = post_repository
 
     async def __call__(self, request: UUID) -> PostDetailsResponse:
-        post = await self.post_repository.find_by_id(UserId(request))
+        post = await self.post_repository.find_by_id(UserId(request))  # type: ignore
 
         if post is None:
             raise PostNotFoundError(f"Post with id {request} not found")

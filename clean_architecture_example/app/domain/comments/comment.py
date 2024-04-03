@@ -23,9 +23,7 @@ class CommentContent(ValueObject):
             raise DomainValidationError("Comment content cannot be empty")
 
         if len(self.value) > 1000:
-            raise DomainValidationError(
-                "Invalid comment content. Comment content must be less than 1000 characters."
-            )
+            raise DomainValidationError("Invalid comment content. Comment content must be less than 1000 characters.")
 
 
 @dataclass

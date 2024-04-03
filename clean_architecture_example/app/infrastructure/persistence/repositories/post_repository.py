@@ -68,9 +68,7 @@ class PostgresqlPostRepository(PostRepository):
 
             return [post_from_dict_to_entity(row) for row in result]
 
-    async def find_by_owner_id(
-        self, owner_id: UserId, limit: int = 20, offset: int = 0
-    ) -> list[Post] | None:
+    async def find_by_owner_id(self, owner_id: UserId, limit: int = 20, offset: int = 0) -> list[Post] | None:
         async with self.connection.cursor(row_factory=dict_row) as cursor:
             await cursor.execute(
                 """
@@ -99,14 +97,10 @@ class PostgresqlPostRepository(PostRepository):
         async with self.connection.cursor() as cursor:
             if content is not None:
                 query = """UPDATE posts SET title = %s, updated_at = %s, content = %s WHERE id = %s;"""
-                await cursor.execute(
-                    query, (title.value, updated_at, content.value, id.value)
-                )
+                await cursor.execute(query, (title.value, updated_at, content.value, id.value))
 
             else:
-                query = (
-                    """UPDATE posts SET title = %s, updated_at = %s WHERE id = %s;"""
-                )
+                query = """UPDATE posts SET title = %s, updated_at = %s WHERE id = %s;"""
                 await cursor.execute(query, (title.value, updated_at, id.value))
 
     async def delete(self, id: PostId) -> None:

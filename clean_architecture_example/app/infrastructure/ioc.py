@@ -1,4 +1,4 @@
-from typing import AsyncGenerator
+from collections.abc import AsyncGenerator
 
 from app.application.common.date_time_provider import DateTimeProvider
 from app.application.common.id_provider import IdProvider
@@ -72,9 +72,7 @@ class SettingsProvider(Provider):
         )
 
     @provide(scope=Scope.APP)
-    def main_settings(
-        self, jwt_settings: JwtSettings, db_settings: DatabaseSettings
-    ) -> MainSettings:
+    def main_settings(self, jwt_settings: JwtSettings, db_settings: DatabaseSettings) -> MainSettings:
         return MainSettings(
             jwt_settings=jwt_settings,
             db_settings=db_settings,
@@ -83,9 +81,7 @@ class SettingsProvider(Provider):
 
 class DatabaseConfigurationProvider(Provider):
     @provide(scope=Scope.REQUEST, provides=AsyncConnection)
-    async def provide_db_connection(
-        self, db_settings: DatabaseSettings
-    ) -> AsyncGenerator[AsyncConnection, None]:
+    async def provide_db_connection(self, db_settings: DatabaseSettings) -> AsyncGenerator[AsyncConnection, None]:
         connection = await AsyncConnection.connect(
             **conninfo_to_dict(db_settings.uri),
         )
@@ -99,24 +95,18 @@ class DatabaseAdaptersProvider(Provider):
     unit_of_work = provide(PostgresqlUnitOfWork, provides=UnitOfWork)
     user_repository = provide(PostgresqlUserRepository, provides=UserRepository)
     post_repository = provide(PostgresqlPostRepository, provides=PostRepository)
-    comment_repository = provide(
-        PostgresqlCommentRepository, provides=CommentRepository
-    )
+    comment_repository = provide(PostgresqlCommentRepository, provides=CommentRepository)
 
 
 class AuthenticationAdaptersProvider(Provider):
-    token_processor = provide(
-        JoseJwtTokenProcessor, scope=Scope.APP, provides=JwtTokenProcessor
-    )
+    token_processor = provide(JoseJwtTokenProcessor, scope=Scope.APP, provides=JwtTokenProcessor)
     request = from_context(
         scope=Scope.REQUEST,
         provides=Request,
     )
 
     @provide(scope=Scope.REQUEST, provides=IdProvider)
-    def id_provider(
-        self, token_processor: JwtTokenProcessor, request: Request
-    ) -> IdProvider:
+    def id_provider(self, token_processor: JwtTokenProcessor, request: Request) -> IdProvider:
         return JwtTokenIdProvider(token_processor=token_processor, token=request.auth)
 
 
@@ -125,7 +115,7 @@ class SecurityProvider(Provider):
     password_hasher = provide(Pbkdf2PasswordHasher, provides=PasswordHasher)
 
 
-class DateTimeProvider(Provider):
+class DateTimeProvider(Provider):  # type: ignore
     @provide(scope=Scope.APP, provides=DateTimeProvider)
     def provide_date_time_provider(self) -> DateTimeProvider:
         return SystemDateTimeProvider(Timezone.UTC)
@@ -156,5 +146,5 @@ def create_container() -> AsyncContainer:
         AuthenticationAdaptersProvider(),
         SecurityProvider(),
         UseCasesProvider(),
-        DateTimeProvider(),
+        DateTimeProvider(),  # type: ignore
     )

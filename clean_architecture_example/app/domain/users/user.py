@@ -15,9 +15,7 @@ class UserEmail(ValueObject):
         pattern = r"^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$"
 
         if not re.match(pattern, self.value):
-            raise DomainValidationError(
-                "Invalid email format. Email must be in the format 'example@example.com'."
-            )
+            raise DomainValidationError("Invalid email format. Email must be in the format 'example@example.com'.")
 
 
 @dataclass(frozen=True)
@@ -28,9 +26,7 @@ class UserFirstName(ValueObject):
         if len(self.value) < 1:
             raise DomainValidationError("First name must be at least 1 character long.")
         if len(self.value) > 100:
-            raise DomainValidationError(
-                "First name must be at most 100 characters long."
-            )
+            raise DomainValidationError("First name must be at most 100 characters long.")
         if not self.value.isalpha():
             raise DomainValidationError("First name must only contain letters.")
 
@@ -43,9 +39,7 @@ class UserLastName(ValueObject):
         if len(self.value) < 1:
             raise DomainValidationError("Last name must be at least 1 character long.")
         if len(self.value) > 100:
-            raise DomainValidationError(
-                "Last name must be at most 100 characters long."
-            )
+            raise DomainValidationError("Last name must be at most 100 characters long.")
         if not self.value.isalpha():
             raise DomainValidationError("Last name must only contain letters.")
 
@@ -63,9 +57,7 @@ class User(Entity[UserId]):
     hashed_password: str
 
     @staticmethod
-    def create(
-        first_name: str, last_name: str, email: str, hashed_password: str
-    ) -> "User":
+    def create(first_name: str, last_name: str, email: str, hashed_password: str) -> "User":
         return User(
             id=UserId(uuid4()),
             email=UserEmail(email),
